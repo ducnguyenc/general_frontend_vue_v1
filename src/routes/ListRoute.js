@@ -4,6 +4,7 @@ import UserRegister from "../pages/user/Register"
 import UserLogin from "../pages/user/Login"
 import Dashboard from "../pages/admin/Dashboard"
 import AdminLogin from "../pages/admin/Login"
+import AdminRegister from "../pages/admin/Register"
 import UserProviderContext from "../context/UserContext";
 
 function ListRoute() {
@@ -17,6 +18,7 @@ function ListRoute() {
 
                 <Route path="/admin" element={<Dashboard />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/register" element={<AdminRegister />} />
             </Routes>
         </UserProviderContext>
     )

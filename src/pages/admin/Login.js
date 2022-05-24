@@ -38,7 +38,7 @@ function Login() {
             await axios.get('/sanctum/csrf-cookie');
             const res2 = await axios({
                 method: 'post',
-                url: '/api/login',
+                url: '/api/admin/login',
                 data: {
                     email: email,
                     password: password,
