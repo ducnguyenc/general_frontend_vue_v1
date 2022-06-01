@@ -50,7 +50,6 @@ function Login() {
             history('/admin')
 
         } catch (error) {
-            console.log(error);
             setErrors(error.response.data.data)
 
         }

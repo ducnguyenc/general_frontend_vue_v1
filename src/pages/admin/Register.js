@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import MainLayout from "../../layouts/admin/MainLayout";
 
 function Register() {
-    console.log("register")
     const [name, setName] = useState("duc");
     const [email, setEmail] = useState("duc@gmail.com");
     const [password, setPassword] = useState("123");
@@ -40,7 +39,6 @@ function Register() {
                     password: password,
                 }
             }).then((response) => {
-                console.log(response.data);
             }).catch((error) => {
                 setErrors(error.response.data.data);
             });

@@ -1,10 +1,4 @@
-// 1
 export default function Messagebox({ message }) {
-    const formatDate = (value) => {
-        if (!value) return '';
-        return new Date(value).toLocalTimeString();
-    };
-    // 2
     return (
         <div>
             <div>
@@ -12,7 +6,7 @@ export default function Messagebox({ message }) {
                     <b>{message.user}</b>
                 </p>
                 <p>{message.message}</p>
-                <p>{formatDate(message.createdAt)}</p>
+                <p>{message.createdAt}</p>
             </div>
         </div>
     );

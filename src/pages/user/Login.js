@@ -48,7 +48,6 @@ function Login() {
             history('/')
 
         } catch (error) {
-            console.log(error);
             setErrors(error.response.data.data)
             
         }
@@ -63,6 +62,7 @@ function Login() {
             data: {}
         }).then(data => {
             setUser(data.data)
+            localStorage.setItem('user', JSON.stringify(data.data));
         }).catch(err => {
             setUser({name: err.response.data.message})
         })

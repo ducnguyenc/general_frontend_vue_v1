@@ -3,7 +3,7 @@ import MainLayout from '../../layouts/user/MainLayout'
 import { UserContext } from '../../context/UserContext';
 
 export default function Home() {
-    const { user } = useContext(UserContext);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -16,7 +16,6 @@ export default function Home() {
                     <p>{user?.name}</p>
                     <button type="submit">Add</button>
                 </form>
-                
             </div>
         </MainLayout>
     )

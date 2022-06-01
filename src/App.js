@@ -1,12 +1,14 @@
 import './App.css';
 import ListRoute from "./routes/ListRoute"
 import PublicMessagesPage from './components/PublicMessagesPage';
+import UserProviderContext, { UserContext } from './context/UserContext';
 
 function App() {
   return (
     <div className="App">
-      <ListRoute />
-      <PublicMessagesPage />
+      <UserProviderContext>
+        <ListRoute />
+      </UserProviderContext>
     </div>
   );
 }
