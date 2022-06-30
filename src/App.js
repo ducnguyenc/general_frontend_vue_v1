@@ -1,7 +1,6 @@
 import './App.css';
 import ListRoute from "./routes/ListRoute"
-import PublicMessagesPage from './components/PublicMessagesPage';
-import UserProviderContext, { UserContext } from './context/UserContext';
+import UserProviderContext from './context/UserContext';
 
 function App() {
   return (

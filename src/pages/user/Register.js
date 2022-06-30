@@ -24,25 +24,24 @@ function Register() {
         setPassword(event.target.value)
     }
 
-    async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault()
 
         axios.defaults.withCredentials = true;
         axios.defaults.baseURL = 'http://localhost/';
-        await axios.get('/sanctum/csrf-cookie').then(async function(response) {
-            await axios({
-                method: 'post',
-                url: '/api/register',
-                data: {
-                    name: name,
-                    email: email,
-                    password: password,
-                }
-            }).then((response) => {
-            }).catch((error) => {
-                setErrors(error.response.data.data);
-            });
-        })
+        axios({
+            method: 'post',
+            url: '/api/register',
+            data: {
+                name: name,
+                email: email,
+                password: password,
+            }
+        }).then((response) => {
+            console.log();
+        }).catch((error) => {
+            setErrors(error);
+        });
     }
 
 

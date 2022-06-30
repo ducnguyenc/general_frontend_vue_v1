@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
 import Messagebox from './Messagebox';
 import axios from 'axios';
+import { UserContext } from '../context/UserContext';
 
 export default function PublicMessagesPage() {
-    const [user, setUser] = useState('');
+    const { user } = useContext(UserContext);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
@@ -21,19 +21,18 @@ export default function PublicMessagesPage() {
             return;
         }
 
-        try {
-            await axios.get('/sanctum/csrf-cookie');
-            await axios({
-                method: 'get',
-                url: '/api/test',
-                params: {
-                    user: user,
-                    message: message,
-                }
-            })
-        } catch (error) {
-            console.error(error);
-        }
+        axios({
+            method: 'get',
+            url: '/api/test',
+            params: {
+                user: user.name,
+                message: message,
+            }
+        }).then(function (response) {
+            console.log(response);
+        }).error(function (err) {
+            console.log(err);
+        });
     }
 
     useEffect(() => {
@@ -72,13 +71,7 @@ export default function PublicMessagesPage() {
                 </div>
                 <div>
                     <form onSubmit={(e) => handleSendMessage(e)}>
-                        <input
-                            type="text"
-                            placeholder="Set your username"
-                            value={user}
-                            onChange={(e) => setUser(e.target.value)}
-                            required
-                        />
+                        <b>{user?.name}</b>
                         <div>
                             <input
                                 type="text"

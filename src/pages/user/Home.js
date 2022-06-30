@@ -5,10 +5,6 @@ import { UserContext } from '../../context/UserContext';
 export default function Home() {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    async function handleSubmit(event) {
-        event.preventDefault()
-    }
-
     return (
         <MainLayout>
             <div>

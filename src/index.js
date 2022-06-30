@@ -4,18 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Auth0Provider
-      domain="test-single-sign-on.jp.auth0.com"
-      clientId="S3UzMq7bxlp63qvxdILXElw0vy9sFePL"
-      redirectUri="http://localhost:3000/admin"
-    >
-      <App />
-    </Auth0Provider>
+    <App />
   </BrowserRouter>
 );
 
