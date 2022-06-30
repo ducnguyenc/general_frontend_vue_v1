@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 function Login() {
-    const { loginWithRedirect, logout, user } = useAuth0();
+    const { loginWithRedirect, logout } = useAuth0();
     const { setUser } = useContext(UserContext);
     const [email, setEmail] = useState("1duc@gmail.com");
     const [password, setPassword] = useState("12345678");
@@ -36,7 +36,7 @@ function Login() {
 
         try {
             await axios.get('/sanctum/csrf-cookie');
-            const res2 = await axios({
+            await axios({
                 method: 'post',
                 url: '/api/admin/login',
                 data: {
@@ -50,7 +50,6 @@ function Login() {
             history('/admin')
 
         } catch (error) {
-            console.log(error);
             setErrors(error.response.data.data)
 
         }

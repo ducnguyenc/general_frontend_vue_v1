@@ -1,9 +1,11 @@
 import MainLayout from "../../layouts/admin/MainLayout";
 
-export default function () {
+function Dashboard () {
     return (
         <MainLayout>
             Dashboard
         </MainLayout>
     )
 }
+
+export default Dashboard;
