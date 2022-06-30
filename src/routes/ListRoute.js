@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 
 import Home from "../pages/user/Home"
 import UserRegister from "../pages/user/Register"
@@ -9,12 +8,9 @@ import UserChat from "../pages/user/Chat"
 import Dashboard from "../pages/admin/Dashboard"
 import AdminLogin from "../pages/admin/Login"
 import AdminRegister from "../pages/admin/Register"
-import { useContext } from "react";
 
 function ListRoute() {
     const user = localStorage.getItem('user');
-
-    const isLogin = user !== null ? true : false;
 
     const Authen = (Component) => {
         if (!user) {
