@@ -1,14 +1,15 @@
-import axios from "axios";
-import React, { useState } from "react";
-import MainLayout from "../../layouts/user/MainLayout";
+import axios from "axios"
+import React, { useState } from "react"
+import MainLayout from "../../layouts/user/MainLayout"
 
 function Login() {
-    const [email, setEmail] = useState("duc@gmail.com");
-    const [password, setPassword] = useState("12345678");
+    const [email, setEmail] = useState("duc@gmail.com")
+    const [password, setPassword] = useState("12345678")
     const [errors, setErrors] = useState([{
         email: '',
         password: '',
-    }]);
+        error: '',
+    }])
 
     function handleChangeEmail(event) {
         setEmail(event.target.value)
@@ -21,12 +22,14 @@ function Login() {
     function handleSubmit(event) {
         setErrors({
             email: '',
-            password: ''
+            password: '',
+            error: '',
+
         })
         event.preventDefault()
 
-        axios.defaults.withCredentials = true;
-        axios.defaults.baseURL = 'http://localhost/';
+        axios.defaults.withCredentials = true
+        axios.defaults.baseURL = 'http://localhost/'
         axios({
             method: 'post',
             url: '/api/login',
@@ -35,10 +38,16 @@ function Login() {
                 password: password,
             }
         }).then((response) => {
-            console.log();
+            let data = response.data.data
+            localStorage.setItem('access_token', data.access_token)
         }).catch((error) => {
-            setErrors(error);
-        });
+            let status = error.response.data.status
+            console.log(status);
+            if (status === 'fail') {
+                let data = error.response.data.data
+                setErrors(data)
+            }
+        })
     }
 
     return (
@@ -54,6 +63,7 @@ function Login() {
                         Pass:
                         <input type="text" name="password" value={password} onChange={handleChangePass} />
                         <p>{errors.password}</p>
+                        <p>{errors.error}</p>
                     </label>
                     <button type="submit">Add</button>
                 </form>

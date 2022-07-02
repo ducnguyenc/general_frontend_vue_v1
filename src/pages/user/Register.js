@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/user/MainLayout";
 function Register() {
     const [name, setName] = useState("duc");
     const [email, setEmail] = useState("duc@gmail.com");
-    const [password, setPassword] = useState("123");
+    const [password, setPassword] = useState("123456789");
     const [errors, setErrors] = useState([{
         name: '',
         email: '',
@@ -25,6 +25,10 @@ function Register() {
     }
 
     function handleSubmit(event) {
+        setErrors({
+            email: '',
+            password: ''
+        })
         event.preventDefault()
 
         axios.defaults.withCredentials = true;
@@ -38,9 +42,11 @@ function Register() {
                 password: password,
             }
         }).then((response) => {
-            console.log();
+            let data = response.data.data
+            localStorage.setItem('email', data.email)
+            localStorage.setItem('name', data.name)
         }).catch((error) => {
-            setErrors(error);
+            setErrors(error.response.data.data);
         });
     }
 
@@ -52,17 +58,17 @@ function Register() {
                     <label>
                         Name:
                         <input type="text" name="name" value={name} onChange={handleChangeName} />
-                        <p>{errors.name}</p>
+                        <p style={{color: 'red'}}>{errors.name}</p>
                     </label>
                     <label>
                         Email:
                         <input type="text" name="email" value={email} onChange={handleChangeEmail} />
-                        <p>{errors.email}</p>
+                        <p style={{color: 'red'}}>{errors.email}</p>
                     </label>
                     <label>
                         Pass:
                         <input type="text" name="password" value={password} onChange={handleChangePass} />
-                        <p>{errors.password}</p>
+                        <p style={{color: 'red'}}>{errors.password}</p>
                     </label>
                     <button type="submit">Add</button>
                 </form>
