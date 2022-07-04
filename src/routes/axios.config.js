@@ -1,17 +1,18 @@
-// import axios from "axios";
+export const instance = axios.create({
+    baseURL: 'http://localhost',
+    withCredentials: true
+})
 
-// const instance = axios.create({
-//     baseURL: 'http://localhost:3000/',
-// })
+instance.interceptors.request.use(function (config) {
+    config.headers.Authorization = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+})
 
-// instance.interceptors.request.use(function (config) {
-//     // Do something before request is sent
-//     const ACCESS_TOKEN = localStorage.getItem('access_token');
-//     config.headers['x-token-access'] = ACCESS_TOKEN;
-//     return config;
-// }, function (error) {
-//     // Do something with request error
-//     return Promise.reject(error);
-// })
-
-// export const abc = { instance };
+instance.interceptors.response.use(function (response) {
+    return response.data;
+}, function (error) {
+    error = error.response.data
+    return Promise.reject(error);
+});

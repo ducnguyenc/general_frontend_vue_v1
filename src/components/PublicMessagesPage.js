@@ -49,7 +49,6 @@ export default function PublicMessagesPage() {
         echo
             .channel('channel-name')
             .subscribed(() => {
-                console.log('You are subscribed');
             })
             .listen('OrderShipmentStatusUpdated', (data) => {
                 setMessages((oldMessages) => [...oldMessages, data]);

@@ -1,16 +1,16 @@
-import axios from "axios";
-import React, { useState } from "react";
-import MainLayout from "../../layouts/user/MainLayout";
+import React, { useState } from "react"
+import MainLayout from "../../layouts/user/MainLayout"
+import { instance } from "../../routes/axios.config"
 
 function Register() {
-    const [name, setName] = useState("duc");
-    const [email, setEmail] = useState("duc@gmail.com");
-    const [password, setPassword] = useState("123456789");
+    const [name, setName] = useState("duc")
+    const [email, setEmail] = useState("duc@gmail.com")
+    const [password, setPassword] = useState("12345678")
     const [errors, setErrors] = useState([{
         name: '',
         email: '',
         password: '',
-    }]);
+    }])
 
     function handleChangeName(event) {
         setName(event.target.value)
@@ -31,9 +31,7 @@ function Register() {
         })
         event.preventDefault()
 
-        axios.defaults.withCredentials = true;
-        axios.defaults.baseURL = 'http://localhost/';
-        axios({
+        await instance({
             method: 'post',
             url: '/api/register',
             data: {
@@ -42,14 +40,12 @@ function Register() {
                 password: password,
             }
         }).then((response) => {
-            let data = response.data.data
-            localStorage.setItem('email', data.email)
-            localStorage.setItem('name', data.name)
         }).catch((error) => {
-            setErrors(error.response.data.data);
-        });
+            if (error.status === 'fail') {
+                setErrors(error.data)
+            }
+        })
     }
-
 
     return (
         <MainLayout>
@@ -58,17 +54,17 @@ function Register() {
                     <label>
                         Name:
                         <input type="text" name="name" value={name} onChange={handleChangeName} />
-                        <p style={{color: 'red'}}>{errors.name}</p>
+                        <p>{errors?.name}</p>
                     </label>
                     <label>
                         Email:
                         <input type="text" name="email" value={email} onChange={handleChangeEmail} />
-                        <p style={{color: 'red'}}>{errors.email}</p>
+                        <p>{errors?.email}</p>
                     </label>
                     <label>
                         Pass:
                         <input type="text" name="password" value={password} onChange={handleChangePass} />
-                        <p style={{color: 'red'}}>{errors.password}</p>
+                        <p>{errors?.password}</p>
                     </label>
                     <button type="submit">Add</button>
                 </form>

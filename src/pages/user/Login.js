@@ -1,10 +1,12 @@
-import axios from "axios"
-import React, { useState } from "react"
-import MainLayout from "../../layouts/user/MainLayout"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import MainLayout from "../../layouts/user/MainLayout";
+import { instance } from '../../routes/axios.config';
 
 function Login() {
-    const [email, setEmail] = useState("duc@gmail.com")
-    const [password, setPassword] = useState("12345678")
+    const history = useNavigate();
+    const [email, setEmail] = useState("duc@gmail.com");
+    const [password, setPassword] = useState("123456789");
     const [errors, setErrors] = useState([{
         email: '',
         password: '',
@@ -28,9 +30,7 @@ function Login() {
         })
         event.preventDefault()
 
-        axios.defaults.withCredentials = true
-        axios.defaults.baseURL = 'http://localhost/'
-        axios({
+        await instance({
             method: 'post',
             url: '/api/login',
             data: {
@@ -38,15 +38,12 @@ function Login() {
                 password: password,
             }
         }).then((response) => {
-            let data = response.data.data
-            localStorage.setItem('access_token', data.access_token)
-        }).catch((error) => {
-            let status = error.response.data.status
-            console.log(status);
-            if (status === 'fail') {
-                let data = error.response.data.data
-                setErrors(data)
-            }
+            const token = JSON.stringify(response.data.token)
+            localStorage.setItem('token', token)
+            const user = JSON.stringify(response.data.user)
+            localStorage.setItem('user', user)
+        }).catch((repsonse) => {
+            history('/')
         })
     }
 
