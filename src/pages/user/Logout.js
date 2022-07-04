@@ -5,7 +5,6 @@ import { instance } from '../../routes/axios.config';
 
 export default function Logout() {
     const navigate = useNavigate();
-    const tokenId = localStorage.getItem("token");
 
     async function handleSubmit(event) {
         event.preventDefault()

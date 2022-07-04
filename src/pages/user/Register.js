@@ -31,7 +31,7 @@ function Register() {
         })
         event.preventDefault()
 
-        await instance({
+        instance({
             method: 'post',
             url: '/api/register',
             data: {

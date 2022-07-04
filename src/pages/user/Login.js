@@ -6,7 +6,7 @@ import { instance } from '../../routes/axios.config';
 function Login() {
     const history = useNavigate();
     const [email, setEmail] = useState("duc@gmail.com");
-    const [password, setPassword] = useState("123456789");
+    const [password, setPassword] = useState("12345678");
     const [errors, setErrors] = useState([{
         email: '',
         password: '',
@@ -30,7 +30,7 @@ function Login() {
         })
         event.preventDefault()
 
-        await instance({
+        instance({
             method: 'post',
             url: '/api/login',
             data: {

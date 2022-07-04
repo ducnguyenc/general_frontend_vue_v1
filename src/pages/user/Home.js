@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainLayout from '../../layouts/user/MainLayout'
 import { instance } from '../../routes/axios.config';
 
