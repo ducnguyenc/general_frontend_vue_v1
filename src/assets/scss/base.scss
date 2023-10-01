@@ -1,0 +1,10 @@
+$colorError: red;
+$colorSuccess: green;
+
+.success {
+  background-color: $colorSuccess;
+}
+
+.error {
+  background-color: $colorError;
+}

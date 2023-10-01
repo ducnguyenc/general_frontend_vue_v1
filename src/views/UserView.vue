@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import LoginComp from '../components/LoginComp.vue'
+import UserComp from '../components/UserComp.vue'
 </script>
 
 <template>
   <main>
-    <LoginComp />
+    <UserComp />
   </main>
 </template>
